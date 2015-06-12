@@ -77,7 +77,7 @@ In the browser, `qna` is a global variable. In Node, do:
 var qna = require('qna');
 ```
 
-### var q = new qna(containerElement, nodeSelection, snippets [, opts]);
+#### var q = new qna(containerElement, nodeSelection, snippets [, opts]);
 
 This will initialize an question on the `containerElements` `nodeSelection` and corresponding `snippets` and options.
 
@@ -96,11 +96,11 @@ Key | Description | Value
 `form` | The questions form element to respond to | A DOM Element or a selector String
 `answer` | The answer to the question | An instance on qna
 
-### q.ask([callback])
+#### q.ask([callback])
 
 Type the `snippets` to the corresponding `nodeSelection` defined at initialization with an optional callback that will be called after all the snippets have been typed to the screen.
 
-### q.answer(a)
+#### q.answer(a)
 
 `a` is a instance of qna.
 
@@ -108,7 +108,7 @@ Assign an answer to a question.
 
 the answers `a.respond` method will be triggered when the questions form is submitted with the parameters `formEvent` and `formNode`;
 
-### q.respond([, args])
+#### q.respond([, args])
 
 Will trigger the instances responder function with the arguments supplied and set the return value as the instances `snippets` variable and type them to the screen.
 
