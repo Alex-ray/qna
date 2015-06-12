@@ -230,19 +230,15 @@
 
 			clearNodes();
 
-			console.log('snippets, nodes', snippets, nodes);
-
 			type(nodes, snippets, callback);
 		}
 
-		function respond ( formNode, answer ) {
+		function respond ( ) {
 			var args     = Array.prototype.slice.call(arguments);
 			var response = fResponder.apply(this, args);
 
-			if (response !== false) {
-				fSnippets = response;
-				ask( );
-			}
+			fSnippets = response;
+			ask( );
 		}
 
 		function answer (answer) {
@@ -265,10 +261,8 @@
 				return; 
 			} 
 
-			var node = nodes.shift();
+			var node   = nodes.shift();
 			var snippet = snippets.shift();
-
-			console.log(node, snippet);
 
 			var options = { };
 
@@ -333,7 +327,6 @@
 
 	}
 
-	/* istanbul ignore else */
 	if (typeof module == 'object') {
 		module.exports = QnA;
 	} else {
