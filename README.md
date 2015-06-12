@@ -3,6 +3,8 @@
 > Chat like questions and answers
 
 ##Usage
+
+### [Live Example](http://jsfiddle.net/57xon9ov/1/)
 ```html
 <body>
 
