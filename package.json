@@ -1,0 +1,27 @@
+{
+  "name": "qna",
+  "version": "1.0.0",
+  "description": "Chat like questions and answers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alex-ray/qna.git"
+  },
+  "keywords": [
+    "question",
+    "answer",
+    "type",
+    "text",
+    "animate",
+    "forms"
+  ],
+  "author": "Alexander J Ray <mail@alexjray>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Alex-ray/qna/issues"
+  },
+  "homepage": "https://github.com/Alex-ray/qna#readme"
+}

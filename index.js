@@ -181,7 +181,7 @@
 (function(root){
 	'use strict';
 
-	function QnA(container, snippetNodes, snippets, options ) {
+	function qna(container, snippetNodes, snippets, options ) {
 		var self = { };
 
 		// DOM Elements
@@ -328,8 +328,8 @@
 	}
 
 	if (typeof module == 'object') {
-		module.exports = QnA;
+		module.exports = qna;
 	} else {
-		root.QnA = QnA;
+		root.qna = qna;
 	}
 })(this);

@@ -1,4 +1,4 @@
-# QnA.js
+# qna.js
 
 > Chat like questions and answers
 
@@ -56,8 +56,8 @@
 	    var answerOpts   = { responder: answerResponder };
 	    var questionOpts = { form: '.question-form' };
 
-	    var a = new QnA('.answer-wrapper', '.answer-type', defaultAnswerText, answerOpts);
-		var q = new QnA('.question-wrapper', '.question-type', questionText, questionOpts);
+	    var a = new qna('.answer-wrapper', '.answer-type', defaultAnswerText, answerOpts);
+		var q = new qna('.question-wrapper', '.question-type', questionText, questionOpts);
 
 		q.answer(a) ;
 		q.ask( );
@@ -71,13 +71,13 @@
 
 ##Api
 
-In the browser, `QnA` is a global variable. In Node, do:
+In the browser, `qna` is a global variable. In Node, do:
 
 ```js
-var QnA = require('QnA');
+var qna = require('qna');
 ```
 
-### var q = new QnA(containerElement, nodeSelection, snippets [, opts]);
+### var q = new qna(containerElement, nodeSelection, snippets [, opts]);
 
 This will initialize an question on the `containerElements` `nodeSelection` and corresponding `snippets` and options.
 
@@ -94,7 +94,7 @@ Key | Description | Value
 :--|:--|:--
 `responder` | A function to respond to a form submission | A function with Parameters `formEvent` and `formElement` and Returns a `snippetObject` Array
 `form` | The questions form element to respond to | A DOM Element or a selector String
-`answer` | The answer to the question | An instance on QnA
+`answer` | The answer to the question | An instance on qna
 
 ### q.ask([callback])
 
@@ -102,7 +102,7 @@ Type the `snippets` to the corresponding `nodeSelection` defined at initializati
 
 ### q.answer(a)
 
-`a` is a instance of QnA.
+`a` is a instance of qna.
 
 Assign an answer to a question.
 
@@ -117,13 +117,13 @@ Will trigger the instances responder function with the arguments supplied and se
 Install via [npm](https://npmjs.com):
 
 ```
-$ npm i --save QnA
+$ npm i --save qna
 ```
 
 Install via [bower](http://bower.io):
 
 ```
-$ bower i --save alex-ray/QnA
+$ bower i --save alex-ray/qna
 ```
 
 ## License
