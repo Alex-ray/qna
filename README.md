@@ -5,24 +5,26 @@
 ##Usage
 
 #### [Editable Example](http://jsfiddle.net/57xon9ov/7/)
+
+>>>>>>> b2364afbffb7266140812b023c10d26fb29c6df9
 ```html
 <body>
 
 	<div class="question-wrapper">
 	    <p class="question">
-	        <span class="question-type"></span>
-	        <span class="question-type"></span>
+	        <span class="question-snippet"></span>
+	        <span class="question-snippet"></span>
 	    </p>
 
-	    <form id="question-form" name="question" class="question-form">
+	    <form id="question-form" name="question>
 			<input name="name" type="text" placeholder="Your Name">
 	    </form>
 	</div>
 
 	<div class="answer-wrapper">
 	    <p class="answer">
-	        <span class="answer-type"></span>
-	        <span class="answer-type"></span>
+	        <span class="answer-snippet"></span>
+	        <span class="answer-snippet"></span>
 	    </p>
 	</div>
 	
@@ -56,10 +58,10 @@
 	    };	
 
 	    var answerOpts   = { responder: answerResponder };
-	    var questionOpts = { form: '.question-form' };
+	    var questionOpts = { form: '#question-form' };
 
-	    var a = new qna('.answer-wrapper', '.answer-type', defaultAnswerText, answerOpts);
-		var q = new qna('.question-wrapper', '.question-type', questionText, questionOpts);
+	    var a = new qna('.answer-wrapper', '.answer-snippet', defaultAnswerText, answerOpts);
+		var q = new qna('.question-wrapper', '.question-snippet', questionText, questionOpts);
 
 		q.answer(a) ;
 		q.ask( );

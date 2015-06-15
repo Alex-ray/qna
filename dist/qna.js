@@ -279,7 +279,7 @@
 			};
 
 			var removeIsTypingClass = function (el) {
-				el.classList.add('is-typing');
+				el.classList.remove('is-typing');
 			    this();
 			};
 
