@@ -191,7 +191,8 @@
 
 		var fSnippets;
 		var fResponder;
-		var fAnswer
+		var fAnswer;
+    var fAnswerCallback;
 
 		init( );
 
@@ -233,16 +234,17 @@
 			type(nodes, snippets, callback);
 		}
 
-		function respond ( ) {
-			var args     = Array.prototype.slice.call(arguments);
+		function respond (callback) {
+			var args     = Array.prototype.slice.call(arguments, 1);
 			var response = fResponder.apply(this, args);
 
 			fSnippets = response;
-			ask( );
+			ask(callback);
 		}
 
-		function answer (answer) {
+		function answer (answer, answerCallback) {
 			fAnswer = answer;
+      fAnswerCallback = answerCallback
 		}
 
 		// Private Methods		
@@ -261,7 +263,7 @@
 				return; 
 			} 
 
-			var node   = nodes.shift();
+			var node    = nodes.shift();
 			var snippet = snippets.shift();
 
 			var options = { };
@@ -294,9 +296,9 @@
 
 		function answerOrRespond (event) {
 			if ( fAnswer !== undefined ) {
-				fAnswer.respond(event, fFormNode);
+				fAnswer.respond(fAnswerCallback, event, fFormNode);
 			} else if (fResponder !== undefined) {
-				responed(event, fFormNode);
+				responed(undefined, event, fFormNode);
 			}
 		}
 

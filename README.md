@@ -5,8 +5,6 @@
 ##Usage
 
 #### [Editable Example](http://jsfiddle.net/57xon9ov/7/)
-
->>>>>>> b2364afbffb7266140812b023c10d26fb29c6df9
 ```html
 <body>
 
@@ -104,15 +102,17 @@ Key | Description | Value
 
 Type the `snippets` to the corresponding `nodeSelection` defined at initialization with an optional callback that will be called after all the snippets have been typed to the screen.
 
-#### q.answer(a)
+#### q.answer(a, [callback])
 
 `a` is a instance of qna.
 
-Assign an answer to a question.
+`callback` is a function that will be called after the question has been asnwered.
 
-the answers `a.respond` method will be triggered when the questions form is submitted with the parameters `formEvent` and `formNode`;
+Assign an answer and optional callback to a question.
 
-#### q.respond([, args])
+The answers `a.respond` method will be triggered when the questions form is submitted with the parameters `formEvent` and `formNode`;
+
+#### q.respond([callback, args])
 
 Will trigger the instances responder function with the arguments supplied and set the return value as the instances `snippets` variable and type them to the screen.
 
