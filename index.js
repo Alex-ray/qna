@@ -56,14 +56,17 @@
 
     function respond (callback) {
       var args     = Array.prototype.slice.call(arguments, 1);
-      var response = fResponder.apply(this, args);
+
+      if (fResponder !== undefined) {
+        fSnippets = fResponder.apply(this, args);
+      }
 
       fSnippets = response;
       self.ask(callback);
     }
 
-    function answer (answer, answerCallback) {
-      fAnswer = answer;
+    function answer (answerInstance, answerCallback) {
+      fAnswer = answerInstance;
       fAnswerCallback = answerCallback;
     }
 
