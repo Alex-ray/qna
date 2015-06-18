@@ -1,7 +1,7 @@
 {
   "name": "qna",
   "main": "dist/qna.min.js",
-  "version": "1.3.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/alex-ray/qna",
   "authors": [
     "Alexander James Ray"
@@ -11,6 +11,11 @@
   "ignore": [
     "**/.*",
     "bower_components",
-    "node_modules"
-  ]
+    "node_modules",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "malarkey": "https://github.com/yuanqing/malarkey.git#~1.3.0"
+  }
 }
