@@ -198,9 +198,6 @@
     self.respond = respond;
     self.answer  = answer;
 
-    self.fromEl      = fFormNode;
-    self.containerEl = fContainerNode;
-
     return self;
 
     function init ( ) {
@@ -253,7 +250,7 @@
     function clearNodes ( ) {
       for ( var i = 0; i < fSnippetNodes.length; i++) {
         var node = fSnippetNodes[i];
-        var m = malarkey(node);
+        var m = root.malarkey(node);
         m.clear();
       }
     }
@@ -287,7 +284,7 @@
           this();
       };
 
-      var typeWriter = malarkey(node, options);
+      var typeWriter = root.malarkey(node, options);
 
       typeWriter.call(addIsTypingClass);
       typeWriter.type(snippet.str);
