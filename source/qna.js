@@ -21,9 +21,6 @@
     self.respond = respond;
     self.answer  = answer;
 
-    self.fromEl      = fFormNode;
-    self.containerEl = fContainerNode;
-
     return self;
 
     function init ( ) {
