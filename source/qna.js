@@ -1,4 +1,4 @@
-(function(root){
+(function(root, malarkey){
   'use strict';
 
   function qna(container, snippetNodes, snippets, options ) {
@@ -73,7 +73,7 @@
     function clearNodes ( ) {
       for ( var i = 0; i < fSnippetNodes.length; i++) {
         var node = fSnippetNodes[i];
-        var m = root.malarkey(node);
+        var m = malarkey(node);
         m.clear();
       }
     }
@@ -107,7 +107,7 @@
           this();
       };
 
-      var typeWriter = root.malarkey(node, options);
+      var typeWriter = malarkey(node, options);
 
       typeWriter.call(addIsTypingClass);
       typeWriter.type(snippet.str);
@@ -156,4 +156,4 @@
   } else {
     root.qna = qna;
   }
-})(this);
+})(this, this.malarkey);

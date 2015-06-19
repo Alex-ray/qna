@@ -17,7 +17,6 @@ var paths = {
 var defaultTasks = ['lint'];
 
 gulp.task('lint', function() {
-
   return gulp.src(paths.src)
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
