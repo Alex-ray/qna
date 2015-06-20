@@ -39,6 +39,7 @@ module.exports = function(config) {
       ]
     },
     files: [
+      'bower_components/malarkey/dist/malarkey.min.js',
       'node_modules/jquery/dist/jquery.min.js',
       'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
       'test/*.js',

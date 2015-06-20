@@ -1,4 +1,4 @@
-(function(root, malarkey){
+(function(root){
   'use strict';
 
   function qna(container, snippetNodes, snippets, options ) {
@@ -156,4 +156,4 @@
   } else {
     root.qna = qna;
   }
-})(this, this.malarkey);
+})(this);
