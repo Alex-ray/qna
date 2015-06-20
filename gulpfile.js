@@ -5,7 +5,7 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var util   = require('gulp-util');
 var concat = require('gulp-concat');
-var karma  = require('karma');
+var karma  = require('karma').server;
 
 var moduleName = 'qna';
 
