@@ -14,7 +14,7 @@
 	        <span class="question-snippet"></span>
 	    </p>
 
-	    <form id="question-form" name="question>
+	    <form id="question-form" name="question">
 			<input name="name" type="text" placeholder="Your Name">
 	    </form>
 	</div>
@@ -25,7 +25,7 @@
 	        <span class="answer-snippet"></span>
 	    </p>
 	</div>
-	
+
 	<script src="dist/qna.min.js"></script>
 	<script>
 
@@ -53,7 +53,7 @@
 	    		{str: 'Hello, '+name},
 	    		{str: 'It\'s, great to meet you'}
 	    	];
-	    };	
+	    };
 
 	    var answerOpts   = { responder: answerResponder };
 	    var questionOpts = { form: '#question-form' };
