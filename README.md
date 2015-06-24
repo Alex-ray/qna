@@ -1,4 +1,5 @@
-# qna.js
+# qna.js [![Build Status](https://img.shields.io/travis/Alex-ray/qna.svg?branch=master&style=flat)](https://travis-ci.org/Alex-ray/qna)
+[![Coverage Status](https://img.shields.io/coveralls/Alex-ray/qna.svg?style=flat)](https://coveralls.io/r/Alex-ray/qna)
 
 > Chat like questions and answers
 
@@ -15,7 +16,7 @@
 	    </p>
 
 	    <form id="question-form" name="question">
-			<input name="name" type="text" placeholder="Your Name">
+				<input name="name" type="text" placeholder="Your Name">
 	    </form>
 	</div>
 
