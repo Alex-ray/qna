@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/Alex-ray/qna#readme",
   "devDependencies": {
+    "bower": "^1.4.1",
     "browserify-istanbul": "^0.2.1",
     "del": "^1.2.0",
     "gulp": "^3.9.0",
