@@ -232,7 +232,7 @@
     }
 
     function respond (callback) {
-      var args     = Array.prototype.slice.call(arguments, 1);
+      var args = Array.prototype.slice.call(arguments, 1);
 
       if (fResponder !== undefined) {
         fSnippets = fResponder.apply(this, args);
@@ -256,7 +256,6 @@
     }
 
     function type (nodes, snippets, callback) {
-
       if ( nodes.length === 0 || snippets.length === 0 ) {
         if (callback !== undefined ) { callback(); }
         return;
@@ -281,7 +280,7 @@
 
       var removeIsTypingClass = function (el) {
         el.classList.remove('is-typing');
-          this();
+        this();
       };
 
       var typeWriter = malarkey(node, options);
@@ -294,6 +293,7 @@
     }
 
     function answerOrRespond (event) {
+      console.log('answer or respond : ', event);
       if ( fAnswer !== undefined ) {
         fAnswer.respond(fAnswerCallback, event, fFormNode);
       } else if (fResponder !== undefined) {
@@ -302,9 +302,9 @@
     }
 
     function captureFormEvent (formNode, callback) {
-
       if ( formNode.addEventListener !== undefined ) {
-          formNode.addEventListener("submit", callback, false); //Modern browsers
+        console.log('attaching submit event ', formNode);
+          formNode.addEventListener('submit', callback, false); //Modern browsers
       } else if ( formNode.attachEvent !== undefined ){
         formNode.attachEvent('onsubmit', callback); //Old IE
       }
