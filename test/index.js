@@ -116,6 +116,38 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
           }
     });
 
+    it('should not answer if no answer is given', function (done) {
+
+      var responderSnippets = [
+        {str: 'responder foo'},
+        {str: 'responder bar'}
+      ];
+      var qOpts = {
+        form: formElem,
+        responder: function (event){
+          event.stopPropagation();
+          return responderSnippets;
+        }
+      };
+      var question = new qna('.q', 'span', snippets, qOpts);
+
+      question.ask(function (){
+        submitForm(formElem);
+        expectAsk(qElemList, responderSnippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
+        done();
+      });
+
+      expectAsk(qElemList, this.snippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
+    });
+
+
+    it('should not select nodes if node elements are passed in', function (done){
+      var spanElList = qElem.querySelectorAll('span');
+      var question = new qna(qElem, spanElList, snippets);
+      question.ask(done);
+      expectAsk(qElemList, this.snippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
+    });
+
   });
 
   describe('answer(a,[cb])', function () {
@@ -125,7 +157,6 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
 
       var qOpts = {form: formElem};
       var aOpts = {responder: function(event) {
-        console.log('responder', arguments);
         event.preventDefault();
         return _this.snippets;
       }};
@@ -136,18 +167,13 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
       question.answer(answer, done);
 
       question.ask(function(){
-        console.log('ask')
-        $(formElem).submit(function(e){
-          console.log('submit')
-          for ( var i = 0; i < _this.snippets.length; i++ ) {
-            expectTyping(aElemList[i], _this.snippets[i].str, defaultOpts.typeSpeed);
-            clock.tick( defaultOpts.pauseDelay);
-          }
-          return false;
-        });
+        submitForm(formElem);
+        for ( var i = 0; i < _this.snippets.length; i++ ) {
+          expectTyping(aElemList[i], _this.snippets[i].str, defaultOpts.typeSpeed);
+          clock.tick( defaultOpts.pauseDelay);
+        }
       });
 
-      console.log(this.snippets);
       for ( var i = 0; i < this.snippets.length; i++ ) {
         expectTyping(qElemList[i], this.snippets[i].str, defaultOpts.typeSpeed);
         clock.tick( defaultOpts.pauseDelay);
@@ -160,13 +186,10 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
         {str: 'answer bar'}
       ];
 
-      var qOpts = {
-        form: 'form'
-      };
+      var qOpts = { form: formElem };
 
       var aOpts = {
         responder: function (event) {
-          console.log('event: ', event);
             event.preventDefault();
             return answerSnippets;
         }
@@ -175,22 +198,34 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
       var answer   = new qna('.a', 'span', snippets, aOpts);
       var question = new qna('.q', 'span', snippets, qOpts);
 
-      question.answer(answer, function () {
-        for ( var i = 0; i < snippets.length; i++ ) {
-          expectContents(qElemList[i], snippets[i].str);
-          expectContents(aElemList[i], answerSnippets[i].str);
-        }
-        done();
-      });
+      question.answer(answer, done);
 
-      question.ask();
+      question.ask(function (){
+        submitForm(formElem)
+        expectAsk(aElemList, answerSnippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
+      });
+      expectAsk(qElemList, this.snippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
     });
   });
+
+
+  function submitForm(el){
+    var button = el.ownerDocument.createElement('input');
+    button.type = 'submit';
+    el.appendChild(button).click();
+    el.removeChild(button);
+  }
+
+  function expectAsk(elList, snippets, speed, delay) {
+    for ( var i = 0; i < snippets.length; i++ ) {
+      expectTyping(elList[i], snippets[i].str, speed);
+      clock.tick(delay);
+    }
+  }
 
   function expectContents(el, str){
     expect(el.innerHTML).toBe(str);
   }
-
 
   function expectTyping (el, str, speed, delay) {
     var i = -1;

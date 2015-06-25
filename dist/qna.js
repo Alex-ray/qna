@@ -293,7 +293,6 @@
     }
 
     function answerOrRespond (event) {
-      console.log('answer or respond : ', event);
       if ( fAnswer !== undefined ) {
         fAnswer.respond(fAnswerCallback, event, fFormNode);
       } else if (fResponder !== undefined) {
@@ -303,10 +302,7 @@
 
     function captureFormEvent (formNode, callback) {
       if ( formNode.addEventListener !== undefined ) {
-        console.log('attaching submit event ', formNode);
           formNode.addEventListener('submit', callback, false); //Modern browsers
-      } else if ( formNode.attachEvent !== undefined ){
-        formNode.attachEvent('onsubmit', callback); //Old IE
       }
     }
 
