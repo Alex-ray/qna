@@ -1,7 +1,7 @@
 (function(root){
   'use strict';
 
-  function qna(container, snippetNodes, snippets, options ) {
+  function qna(snippetNodes, snippets, options) {
     var self = { };
 
     // DOM Elements
@@ -17,9 +17,8 @@
     init( );
 
     // Interface
-    self.ask     = ask;
-    self.respond = respond;
-    self.answer  = answer;
+    self.respond    = respond;
+    self.bindAnswer = bindAnswer;
 
     return self;
 
@@ -27,7 +26,7 @@
 
       options = options || { };
 
-      fContainerNode = getNode(document, container);
+      fContainerNode = options.container ? getNode(document, options.container) : document;
       fSnippetNodes  = getNodes(fContainerNode, snippetNodes);
 
       fSnippets  = snippets;
@@ -43,28 +42,20 @@
     }
 
     // Public Methods
-
-    function ask ( callback ) {
-
-      var nodes    = Array.prototype.slice.call(fSnippetNodes);
+    function respond (callback) {
+      var args     = Array.prototype.slice.call(arguments, 1);
       var snippets = Array.prototype.slice.call(fSnippets);
+      var nodes    = Array.prototype.slice.call(fSnippetNodes);
+
+      if (fResponder !== undefined) {
+        snippets = fResponder.apply(this, args);
+      }
 
       clearNodes();
-
       type(nodes, snippets, callback);
     }
 
-    function respond (callback) {
-      var args = Array.prototype.slice.call(arguments, 1);
-
-      if (fResponder !== undefined) {
-        fSnippets = fResponder.apply(this, args);
-      }
-
-      self.ask(callback);
-    }
-
-    function answer (answerInstance, answerCallback) {
+    function bindAnswer (answerInstance, answerCallback) {
       fAnswer = answerInstance;
       fAnswerCallback = answerCallback;
     }
@@ -119,7 +110,7 @@
       if ( fAnswer !== undefined ) {
         fAnswer.respond(fAnswerCallback, event, fFormNode);
       } else if (fResponder !== undefined) {
-        respond(undefined, event, fFormNode);
+        self.respond(undefined, event, fFormNode);
       }
     }
 

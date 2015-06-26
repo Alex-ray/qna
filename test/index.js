@@ -59,8 +59,8 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
 
   describe('ask([cb])', function () {
     it('asks question at default type speed and pause delay', function () {
-      var question = new qna('.q', 'span', this.snippets );
-      question.ask();
+      var question = new qna('.q span', this.snippets);
+      question.respond();
       expectAsk(qElemList, this.snippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
     });
 
@@ -73,14 +73,14 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
         this.snippets[i].pauseDelay = delay;
       }
 
-      var question = new qna('.q', 'span', this.snippets);
-      question.ask(done);
+      var question = new qna('.q span', this.snippets);
+      question.respond(done);
       expectAsk(qElemList, this.snippets, speed, delay);
     });
 
     it('calls callback after question has been asked', function (done) {
-          var question = new qna('.q', 'span', this.snippets);
-          question.ask(done);
+          var question = new qna('.q span', this.snippets);
+          question.respond(done);
           expectAsk(qElemList, this.snippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
     });
 
@@ -93,13 +93,14 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
       var qOpts = {
         form: formElem,
         responder: function (event){
+          console.log(arguments);
           event.stopPropagation();
           return responderSnippets;
         }
       };
-      var question = new qna('.q', 'span', snippets, qOpts);
+      var question = new qna('.q span', snippets, qOpts);
 
-      question.ask(function (){
+      question.respond(function (){
         submitForm(formElem);
         expectAsk(qElemList, responderSnippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
         done();
@@ -111,8 +112,9 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
 
     it('should not select nodes if node elements are passed in', function (done){
       var spanElList = qElem.querySelectorAll('span');
-      var question = new qna(qElem, spanElList, snippets);
-      question.ask(done);
+      var opts = {container: qElem};
+      var question = new qna(spanElList, snippets, opts);
+      question.respond(done);
       expectAsk(qElemList, this.snippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
     });
 
@@ -129,12 +131,12 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
         return _this.snippets;
       }};
 
-      var answer   = new qna('.a', 'span', this.snippets, aOpts);
-      var question = new qna('.q', 'span', this.snippets, qOpts);
+      var answer   = new qna('.a span', this.snippets, aOpts);
+      var question = new qna('.q span', this.snippets, qOpts);
 
-      question.answer(answer, done);
+      question.bindAnswer(answer, done);
 
-      question.ask(function(){
+      question.respond(function(){
         submitForm(formElem);
         expectAsk(aElemList, _this.snippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
       });
@@ -157,12 +159,12 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
         }
       };
 
-      var answer   = new qna('.a', 'span', snippets, aOpts);
-      var question = new qna('.q', 'span', snippets, qOpts);
+      var answer   = new qna('.a span', snippets, aOpts);
+      var question = new qna('.q span', snippets, qOpts);
 
       question.answer(answer, done);
 
-      question.ask(function (){
+      question.respond(function (){
         submitForm(formElem)
         expectAsk(aElemList, answerSnippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
       });
