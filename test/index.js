@@ -58,62 +58,30 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
 
 
   describe('ask([cb])', function () {
-    it('asks question at default speed', function () {
+    it('asks question at default type speed and pause delay', function () {
       var question = new qna('.q', 'span', this.snippets );
       question.ask();
-
-      for ( var i = 0; i < this.snippets.length; i++ ) {
-        expectContents(qElemList[i], '');
-      }
-
-      for ( var i = 0; i < this.snippets.length; i++ ) {
-        expectTyping(qElemList[i], this.snippets[i].str, defaultOpts.typeSpeed);
-        clock.tick(defaultOpts.pauseDelay);
-      }
+      expectAsk(qElemList, this.snippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
     });
 
-    it('asks question at given speed', function () {
+    it('asks question at given type speed and pause delay', function (done) {
+      var speed = 100;
+      var delay = 400;
+
       for ( var i = 0; i < this.snippets.length; i++)  {
-        this.snippets[i].typeSpeed = 100;
+        this.snippets[i].typeSpeed = speed;
+        this.snippets[i].pauseDelay = delay;
       }
 
       var question = new qna('.q', 'span', this.snippets);
-      question.ask();
-
-      for ( var i = 0; i < this.snippets.length; i++ ) {
-        expectTyping(qElemList[i], this.snippets[i].str, this.snippets[i].typeSpeed);
-        clock.tick(defaultOpts.pauseDelay);
-      }
-    });
-
-    it('delays snippet at default pause length', function () {
-      var question = new qna('.q', 'span', this.snippets);
-      question.ask();
-      for ( var i = 0; i < this.snippets.length; i++ ) {
-        expectTyping(qElemList[i], this.snippets[i].str, defaultOpts.typeSpeed);
-        clock.tick(defaultOpts.pauseDelay);
-      }
-    });
-
-    it('delays snippet at given default length', function () {
-      for (var i = 0; i < this.snippets.length; i++) {
-        this.snippets[i].pauseDelay = 400;
-      }
-      var question = new qna('.q', 'span', this.snippets );
-      question.ask();
-      for ( var i = 0; i < this.snippets.length; i++ ) {
-        expectTyping(qElemList[i], this.snippets[i].str, defaultOpts.typeSpeed);
-        clock.tick( this.snippets[i].pauseDelay);
-      }
+      question.ask(done);
+      expectAsk(qElemList, this.snippets, speed, delay);
     });
 
     it('calls callback after question has been asked', function (done) {
           var question = new qna('.q', 'span', this.snippets);
           question.ask(done);
-          for ( var i = 0; i < this.snippets.length; i++ ) {
-            expectTyping(qElemList[i], this.snippets[i].str, defaultOpts.typeSpeed);
-            clock.tick( defaultOpts.pauseDelay);
-          }
+          expectAsk(qElemList, this.snippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
     });
 
     it('should not answer if no answer is given', function (done) {
@@ -168,16 +136,10 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
 
       question.ask(function(){
         submitForm(formElem);
-        for ( var i = 0; i < _this.snippets.length; i++ ) {
-          expectTyping(aElemList[i], _this.snippets[i].str, defaultOpts.typeSpeed);
-          clock.tick( defaultOpts.pauseDelay);
-        }
+        expectAsk(aElemList, _this.snippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
       });
 
-      for ( var i = 0; i < this.snippets.length; i++ ) {
-        expectTyping(qElemList[i], this.snippets[i].str, defaultOpts.typeSpeed);
-        clock.tick( defaultOpts.pauseDelay);
-      }
+      expectAsk(qElemList, this.snippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
     });
 
     it('answers question with given responder', function (done) {
