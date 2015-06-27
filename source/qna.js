@@ -48,7 +48,7 @@
       var nodes    = Array.prototype.slice.call(fSnippetNodes);
 
       if (fResponder !== undefined) {
-        var response = fResponder.apply(this, args)
+        var response = fResponder.apply(this, args);
 
         if ( response !== undefined ) {
           snippets = Array.prototype.slice.call(response);
