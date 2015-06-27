@@ -93,12 +93,14 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
       var qOpts = {
         form: formElem,
         responder: function (event){
-          console.log(arguments);
-          event.stopPropagation();
-          return responderSnippets;
+          if (event !== undefined) {
+            event.stopPropagation();
+            return responderSnippets;
+          }
         }
       };
-      var question = new qna('.q span', snippets, qOpts);
+
+      var question = new qna(qElemList, this.snippets, qOpts);
 
       question.respond(function (){
         submitForm(formElem);
@@ -126,13 +128,15 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
       var _this = this;
 
       var qOpts = {form: formElem};
-      var aOpts = {responder: function(event) {
-        event.preventDefault();
-        return _this.snippets;
-      }};
+      var aOpts = {
+        responder: function(event) {
+          event.preventDefault();
+          return _this.snippets;
+        }
+      };
 
-      var answer   = new qna('.a span', this.snippets, aOpts);
-      var question = new qna('.q span', this.snippets, qOpts);
+      var answer   = new qna(aElemList, this.snippets, aOpts);
+      var question = new qna(qElemList, this.snippets, qOpts);
 
       question.bindAnswer(answer, done);
 
@@ -162,7 +166,7 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
       var answer   = new qna('.a span', snippets, aOpts);
       var question = new qna('.q span', snippets, qOpts);
 
-      question.answer(answer, done);
+      question.bindAnswer(answer, done);
 
       question.respond(function (){
         submitForm(formElem)
