@@ -48,10 +48,14 @@
       var nodes    = Array.prototype.slice.call(fSnippetNodes);
 
       if (fResponder !== undefined) {
-        snippets = fResponder.apply(this, args);
+        var response = fResponder.apply(this, args);
+
+        if ( response !== undefined ) {
+          snippets = Array.prototype.slice.call(response);
+        }
       }
 
-      clearNodes();
+      clearNodes(nodes);
       type(nodes, snippets, callback);
     }
 
@@ -61,11 +65,10 @@
     }
 
     // Private Methods
-    function clearNodes ( ) {
-      for ( var i = 0; i < fSnippetNodes.length; i++) {
-        var node = fSnippetNodes[i];
-        var m = malarkey(node);
-        m.clear();
+    function clearNodes (nodes) {
+      for ( var i = 0; i < nodes.length; i++) {
+        var node = nodes[i];
+        node.innerHTML = "";
       }
     }
 
