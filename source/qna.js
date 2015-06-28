@@ -26,17 +26,17 @@
 
       options = options || { };
 
-      fContainerNode = options.container ? getNode(document, options.container) : document;
-      fSnippetNodes  = getNodes(fContainerNode, snippetNodes);
+      fContainerNode = options.container ? _getOrReturnNode(document, options.container) : document;
+      fSnippetNodes  = _getOrReturnNodes(fContainerNode, snippetNodes);
 
       fSnippets  = snippets;
 
       fResponder = options.responder;
-      fFormNode  = getNode(fContainerNode, options.form);
+      fFormNode  = _getOrReturnNode(fContainerNode, options.form);
       fAnswer    = options.answer;
 
       if (fFormNode !== undefined && fFormNode !== null) {
-        captureFormEvent(fFormNode, answerOrRespond);
+        _captureFormEvent(fFormNode, _answerOrRespond);
       }
 
     }
@@ -55,8 +55,8 @@
         }
       }
 
-      clearNodes(nodes);
-      type(nodes, snippets, callback);
+      _clearNodes(nodes);
+      _type(nodes, snippets, callback);
     }
 
     function bindAnswer (answerInstance, answerCallback) {
@@ -65,14 +65,14 @@
     }
 
     // Private Methods
-    function clearNodes (nodes) {
+    function _clearNodes (nodes) {
       for ( var i = 0; i < nodes.length; i++) {
         var node = nodes[i];
         node.innerHTML = "";
       }
     }
 
-    function type (nodes, snippets, callback) {
+    function _type (nodes, snippets, callback) {
       if ( nodes.length === 0 || snippets.length === 0 ) {
         if (callback !== undefined ) { callback(); }
         return;
@@ -86,20 +86,6 @@
       options.pauseDelay = snippet.pauseDelay || 750;
       options.typeSpeed  = snippet.typeSpeed  || 50;
 
-      var next = function () {
-        type(nodes, snippets, callback);
-      };
-
-      var addIsTypingClass = function (el) {
-        el.classList.add('is-typing');
-          this();
-      };
-
-      var removeIsTypingClass = function (el) {
-        el.classList.remove('is-typing');
-        this();
-      };
-
       var typeWriter = malarkey(node, options);
 
       typeWriter.call(addIsTypingClass);
@@ -107,9 +93,23 @@
       typeWriter.pause();
       typeWriter.call(removeIsTypingClass);
       typeWriter.call(next);
+
+      function next () {
+        _type(nodes, snippets, callback);
+      }
+
+      function removeIsTypingClass (el) {
+        el.classList.remove('is-typing');
+        this();
+      }
+
+      function addIsTypingClass (el) {
+        el.classList.add('is-typing');
+        this();
+      }
     }
 
-    function answerOrRespond (event) {
+    function _answerOrRespond (event) {
       if ( fAnswer !== undefined ) {
         fAnswer.respond(fAnswerCallback, event, fFormNode);
       } else if (fResponder !== undefined) {
@@ -117,13 +117,13 @@
       }
     }
 
-    function captureFormEvent (formNode, callback) {
+    function _captureFormEvent (formNode, callback) {
       if ( formNode.addEventListener !== undefined ) {
           formNode.addEventListener('submit', callback, false); //Modern browsers
       }
     }
 
-    function getNodes (container, node) {
+    function _getOrReturnNodes (container, node) {
       if (typeof node === 'string') {
         return container.querySelectorAll(node);
       }
@@ -131,14 +131,13 @@
       return node;
     }
 
-    function getNode (container, node) {
+    function _getOrReturnNode (container, node) {
       if (typeof node === 'string') {
         return container.querySelector(node);
       }
 
       return node;
     }
-
   }
 
   if (typeof module == 'object') {
