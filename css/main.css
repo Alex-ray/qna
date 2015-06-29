@@ -1,0 +1,72 @@
+html, body {
+    font-family: 'Helvetica Neue';
+    color: #2D2F31;
+}
+
+section {
+    margin: 0 auto;
+    font-size: 1.5em;
+}
+
+section .question,
+section .answer {
+  margin: 50px;
+}
+
+input {
+    position: relative;
+    overflow: hidden;
+    outline: none;
+    border: none;
+    font-size: 1.125em;
+    display: inline-block;
+    width: 200px;
+    padding: 0.25em 0;
+    color: #5D97F5;
+    border-bottom: 2px solid #2D2F31;
+}
+
+.is-typing,
+.is-waiting {
+    position: relative;
+    overflow: hidden;
+}
+
+.is-waiting input:focus { z-index: 3; }
+
+.is-waiting:before,
+.is-typing:before {
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index:1;
+}
+
+.is-typing:after,
+.is-waiting:before {
+  -webkit-animation-name: cursor-blink;
+  animation-name: cursor-blink;
+  -webkit-animation-duration: 0.8s;
+  animation-duration: 0.8s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  color: #9178E2;
+  border-right: 3px solid #5D97F5;
+  content: '';
+}
+
+@-webkit-keyframes cursor-blink {
+    1%{opacity:0}
+    40%{opacity:0}
+    60%{opacity:1}
+    100%{opacity:1}
+}
+@keyframes cursor-blink{
+    1%{opacity:0}
+    40%{opacity:0}
+    60%{opacity:1}
+    100%{opacity:1}
+}
