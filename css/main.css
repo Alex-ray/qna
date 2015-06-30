@@ -1,16 +1,53 @@
 html, body {
-    font-family: 'Helvetica Neue';
+    font-family: 'Cousine', 'Helvetica Neue';
+    font-weight: 400;
     color: #2D2F31;
 }
 
-section {
-    margin: 0 auto;
-    font-size: 1.5em;
+h1 {
+  text-align: center;
+  color: #5D97F5;
+  font-weight: 700;
+  line-height: 1em;
+  margin: 50px 0;
 }
 
-section .question,
-section .answer {
-  margin: 50px;
+a {
+  text-decoration: none;
+  color: #5D97F5;
+}
+a::active {  color: #5D97F5; }
+
+p { line-height: 1.5em;}
+
+#questions {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+}
+
+section {
+    display: inline-block;
+    text-align: left;
+    margin: 100px auto;
+    width: 450px;
+
+    font-size: 1.5em;
+    opacity: 0;
+
+    transition: opacity 250ms ease-in-out, transform 350ms ease-in-out;
+
+    transform: translate3d(0,-10%,0);
+    -webkit-transform: translate3d(0,-10%,0);
+}
+
+section.active {
+  opacity: 1;
+  transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
 }
 
 input {
@@ -20,10 +57,13 @@ input {
     border: none;
     font-size: 1.125em;
     display: inline-block;
-    width: 200px;
+    width: 450px;
     padding: 0.25em 0;
     color: #5D97F5;
     border-bottom: 2px solid #2D2F31;
+    font-family: 'Cousine', 'Helvetica Neue';
+    font-weight: 700;
+
 }
 
 .is-typing,
@@ -34,8 +74,8 @@ input {
 
 .is-waiting input:focus { z-index: 3; }
 
-.is-waiting:before,
-.is-typing:before {
+.is-waiting::before,
+.is-typing::before {
     height: 100%;
     top: 0;
     left: 0;
@@ -43,8 +83,8 @@ input {
     z-index:1;
 }
 
-.is-typing:after,
-.is-waiting:before {
+.is-typing::after,
+.is-waiting::before {
   -webkit-animation-name: cursor-blink;
   animation-name: cursor-blink;
   -webkit-animation-duration: 0.8s;
