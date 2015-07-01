@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/Alex-ray/qna/issues"
   },
-  "homepage": "https://github.com/Alex-ray/qna#readme",
+  "homepage": "http://alexjray.com/qna",
   "devDependencies": {
     "bower": "^1.4.1",
     "browserify-istanbul": "^0.2.1",
