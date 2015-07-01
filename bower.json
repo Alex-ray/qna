@@ -1,7 +1,7 @@
 {
   "name": "qna",
   "main": "dist/qna.min.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "http://alexjray.com/qna",
   "authors": [
     "Alexander James Ray"
