@@ -33,8 +33,10 @@ section {
     display: inline-block;
     text-align: left;
     margin: 100px auto;
-    width: 450px;
+    max-width: 450px;
+    width: 80%;
 
+    padding: 0 10%;
     font-size: 1.5em;
     opacity: 0;
 
@@ -58,6 +60,7 @@ input {
     font-size: 1.125em;
     display: inline-block;
     width: 450px;
+    max-width: 100%;
     padding: 0.25em 0;
     color: #5D97F5;
     border-bottom: 2px solid #2D2F31;
