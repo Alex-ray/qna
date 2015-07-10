@@ -2,7 +2,7 @@
 
 > Chat like questions and answers
 
-##Usage
+## Usage
 
 #### [Editable Example](http://jsfiddle.net/57xon9ov/8/)
 ```html
@@ -64,7 +64,7 @@
 ```
 
 
-##Api
+## Api
 
 In the browser, `qna` is a global variable. In Node, do:
 
