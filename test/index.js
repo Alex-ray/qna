@@ -57,7 +57,7 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
   });
 
 
-  describe('ask([cb])', function () {
+  describe('respond([cb])', function () {
     it('asks question at default type speed and pause delay', function () {
       var question = new qna('.q span', this.snippets);
       question.respond();
@@ -119,6 +119,15 @@ describe("qna(elem, nodeList, Array, [, opts] )", function () {
       question.respond(done);
       expectAsk(qElemList, this.snippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
     });
+
+
+    it('should only respond once', function (done) {
+      var spanElList = qElem.querySelectorAll('span');
+      var question = new qna(spanElList, snippets);
+      question.respond(done);
+      expectAsk(qElemList, this.snippets, defaultOpts.typeSpeed, defaultOpts.pauseDelay);
+      question.respond();
+    })
 
   });
 

@@ -14,6 +14,9 @@
     var fAnswer;
     var fAnswerCallback;
 
+    // States
+    var fIsTyping;
+
     init( );
 
     // Interface
@@ -23,6 +26,7 @@
     return self;
 
     function init ( ) {
+      fIsTyping = false;
 
       options = options || { };
 
@@ -73,10 +77,14 @@
     }
 
     function _type (nodes, snippets, callback) {
-      if ( nodes.length === 0 || snippets.length === 0 ) {
+
+      if ( nodes.length === 0 || snippets.length === 0) {
+        fIsTyping = false;
         if (callback !== undefined ) { callback(); }
         return;
       }
+
+      fIsTyping = true;
 
       var node    = nodes.shift();
       var snippet = snippets.shift();
