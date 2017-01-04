@@ -4,7 +4,7 @@
 
 ## Usage
 
-#### [Editable Example](http://jsfiddle.net/57xon9ov/8/)
+#### [Editable Example](http://jsfiddle.net/57xon9ov/14/)
 ```html
 <body>
   <p class="question">
